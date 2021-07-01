@@ -1,0 +1,29 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates (Ubuntu)
+    tags: always 
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+
+- hosts: web_servers
+  become: true
+  tasks:
+  
+  - name: use args, env and loops with shell
+    shell: echo "Hello World!" > $TARGET
+    args:
+      chdir: /tmp
+    environment:
+      TARGET: "{{ item }}"
+    loop:
+      - test_file1
+      - test_file2
+     
+    
