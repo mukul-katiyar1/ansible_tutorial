@@ -7,3 +7,6 @@
 [file_servers]
 192.168.1.12 apache_package=apache2 php_package=libapache2-mod-php
 #CentOS_IP_Address apache_package=hhtpd php_package=php
+
+[workstations]
+192.168.1.8 apache_package=apache2 php_package=libapache2-mod-php
