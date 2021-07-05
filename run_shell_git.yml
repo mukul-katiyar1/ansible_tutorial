@@ -1,0 +1,26 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates (Ubuntu)
+    tags: always 
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+
+- hosts: web_servers
+  become: true
+  tasks:
+  
+  - name: Download shell script from Github
+    command: sudo wget -P /home -O script.sh https://github.com/mukul-katiyar1/ansible_tutorial/raw/main/script.sh
+  
+  - name: Give execute permissions to the shell file
+    command: sudo chmod +x /home/mukul_katiyar/script.sh
+
+  - name: Execute the script and save the output
+    shell: /home/mukul_katiyar/script.sh > output.txt
