@@ -1,9 +1,9 @@
 ---
-
+# pre_taks here denote that these taks will always be carried out before the execution of the first task happens. Usually updating repository indices is put here.
 - hosts: all
   become: true
   pre_tasks:
-
+# tags: always represents to carry out this task always, tags allow you to carry out separate tasks in your playbook. Use "ansible-playbook example.yml --tags "configuration,packages" " commands to run a playbook example.yml with tasks tagged with configuration and packages. 
   - name: install updates (CentOS)
     tags: always
     dnf:
@@ -39,7 +39,8 @@
         - httpd
         - php
     when: ansible_distribution == "CentOS"
-   
+# The copy module to copy files from the worksation VM to the host VM with host groupa as web servers. This task copies a sample HTML code I wrote into the apache index.html file so that when I open the apache homepage on the host it shows me a preview of this HTML file instead of the default homepage.    
+# The copy module has the src field to denote source, the dest filed to denote destination on host machine. We also provide the mode to specify permisiions on the file. Linux permisiions are beyond the scope of this repo.
   - name: copy default html file for site using copy module
     tags: apache,apache2,httpd
     copy:
@@ -87,7 +88,7 @@
     tags: worksations, unzip
     package:
       name: unzip
-
+# We use the unarchive module here to download a zip from the internet and then install it on our workstation. For this before this task we have installed unzip to actually extarct the package. We have specified the remote_src as true.
   - name: install terraform
     tags: workstations, terraform
     unarchive:
