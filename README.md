@@ -19,3 +19,5 @@ Refer to the files in following order:
 4. site.yml for the copy module.
 5. run_shell.yml for shell module
 6. run_shell_git.yml to run a script on a host machine that is stored in a git repo. 
+
+The repo also has VirtualBox_Documenation.pdf that describes how to setup VMs for this demo as well as the Ansible_Documenation.pdf that explains setting up SSH keys for Ansible and installing Ansible on the WorksationVM. 
