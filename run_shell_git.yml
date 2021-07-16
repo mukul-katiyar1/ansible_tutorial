@@ -1,5 +1,5 @@
 ---
-
+# This playbook defines how e run a shell script on a host machine that is stored in a git repo. As usual we have the pre_tasks to update repository indices on our hosts machines.
 - hosts: all
   become: true
   pre_tasks:
@@ -16,11 +16,16 @@
   become: true
   tasks:
   
+  # Here we use the command module from Ansible to download the said script file from a git repo. The repo we are downaloding it from is a public repo so there is no need of an access token here. However if it was private we would ahve used and access token.
+  # We have become true in the task so we will be sudo user so using sudo is optional in these commands. We use the wget command followed by the "-P" to denote the directory we need to save the shell file in and "-O" to specify to overwrite the script.sh file whenever we download it again to allow version control from git.
+  # The "-O" is followed by the raw github link of the shell file.
   - name: Download shell script from Github
     command: sudo wget -P /home -O script.sh https://github.com/mukul-katiyar1/ansible_tutorial/raw/main/script.sh
-  
+    
+  # We have used the chmod command to give execute permissions to the downloaded file. +x denotes we have added execute permissions. By default the files downloaded from the net aren't given execute permissions in Linux.
   - name: Give execute permissions to the shell file
     command: sudo chmod +x /home/mukul_katiyar/script.sh
-
+  
+  # Here we have used the shell module from Ansible to run the script and redirect the output to another file output.txt in the same directory. 
   - name: Execute the script and save the output
     shell: /home/mukul_katiyar/script.sh > output.txt
