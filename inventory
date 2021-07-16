@@ -1,3 +1,5 @@
+#The [group] denotes which group the hosts belong to. Useful in case of running different instructions on different set of machines.
+#The variables apache_package and php_package refer to the package names in case of different GNU/Linux distributions like Ubuntu and CentOS
 [web_servers]
 192.168.1.9 apache_package=apache2 php_package=libapache2-mod-php
 
