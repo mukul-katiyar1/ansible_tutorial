@@ -3,12 +3,13 @@
 - hosts: all
   become: true
   tasks:
-  
+# Similar to the install_apache.yml but this one does not shorthand the playbook. This removes apache and php from machines where they have 2 distributions Ubuntu and CentOS.
+# This task updates the repository index. It uses apt as the package manager so we have added the when condition that this should be triggred only when the Linux ditro on the host is either Ubuntu or Debian because we need dnf as the package manager in CentOS
   - name: update repository index
     apt:
       update_cache: yes
     when: ansible_distribution in ["Ubuntu", "Debian"]
-
+# Similar to the above task. To unintall a package we just turn the state from latest to absent.
   - name: Remove apache2 package
     apt:
       name: apache2
@@ -20,7 +21,7 @@
       name: libapache2-mod-php
       state: absent
     when: ansible_distribution in ["Ubuntu", "Debian"]
-
+# Just the package manager changes from apt to dnf.
   - name: update repository index for CentOS distr
     dnf:
       update_cache: yes
@@ -37,4 +38,5 @@
       name: php
       state: absent
     when: ansible_distribution == "CentOS"
+# Here we have to write so many different tasks based on the distribution of GNU/Linux we have on our hosts machines as the package managers are different for various ditributions of Linux as well as package names also change for them. To reduce our code we can use the generic package manager "package" by ansible and variables conataing name of diffrent packages in the inventory file. Refer to install_apache.yml for this.
 
