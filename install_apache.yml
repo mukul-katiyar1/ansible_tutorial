@@ -1,3 +1,6 @@
+# A very simple playbook. The hosts parameter defines we need to do this on all machines. Become states that we need to become sudo user on these hosts. tasks denotes the instructions we need to run.
+# Name defines the task. package is a generic package manager from Ansible that replaces apt or dnf as per distribution. name under package denotes what needs to be installed. The value of variable is provided for each host in the inventory file.
+# state denotes the latest package and update_cache states to run sudo apt update before installing.
 ---
 
 - hosts: all
