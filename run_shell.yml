@@ -1,5 +1,6 @@
 ---
-
+# This playbook is an exaple of the usage of the shell module in ansible to run shell commands on hosts. The pre_tasks are to basically run sudo apt update on the host amchines to update the repository indices.
+# We are running the shell script on the hosts in the web_servers host group.
 - hosts: all
   become: true
   pre_tasks:
@@ -11,7 +12,9 @@
       update_cache: yes
     when: ansible_distribution == "Ubuntu"
 
-
+# We have specified the host group as web_servers. The taks is just echoing Hello World but instead of shwowing it on the scrren I am redirecting its output to a TARGET environment variable.
+# To understand what the TARGET environment varibale is we see the environment parameter where we specify TARGET as the item variable that denotes the file names we have specified in the loop parameter.
+# In the end this means that the output Hello World is echoed to two files test_file1 and test_file2. These two files are located in the /tmp directory as we have specified that the execution of the shell command takes place in the /tmp directory in the chdir parameter.
 - hosts: web_servers
   become: true
   tasks:
