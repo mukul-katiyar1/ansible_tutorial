@@ -14,7 +14,7 @@ We run an ansible playbook using the command "ansible-playbook --ask-become-pass
 Refer to the files in following order:
 
 1. inventory
-2. anaible.cfg
+2. ansible.cfg
 3. remove_apache.yml and install-apche.yml to compare the diffrences between two.
 4. site.yml for the copy module.
 5. run_shell.yml for shell module
